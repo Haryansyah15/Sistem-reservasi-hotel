@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b43a5371-e1f1-4021-ab85-fba50d249803" name="Changes" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manusia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manusia.java" afterDir="false" />
-    </list>
+    <list default="true" id="b43a5371-e1f1-4021-ab85-fba50d249803" name="Changes" comment="first commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +73,7 @@
       <updated>1734161646617</updated>
       <workItem from="1734161647491" duration="5491000" />
       <workItem from="1734683375406" duration="340000" />
-      <workItem from="1734702788785" duration="949000" />
+      <workItem from="1734702788785" duration="1351000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
