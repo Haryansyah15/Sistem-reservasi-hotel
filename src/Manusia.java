@@ -3,7 +3,6 @@ public abstract class Manusia {
     private String nama;
     private String no_hp;
 
-
     public Manusia(String nik, String nama, String no_hp) {
         this.nik = nik;
         this.nama = nama;
