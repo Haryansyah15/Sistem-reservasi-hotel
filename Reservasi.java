@@ -26,7 +26,7 @@ class Reservasi {
         return !tanggalCheckin.isAfter(tanggalCheckout);
     }
 
-    // Method to get reservation details as a string
+
     public String getDetails() {
         return "Nama: " + pelanggan.getNama() + "\n" +
                 "Alamat: " + pelanggan.alamat + "\n" +
