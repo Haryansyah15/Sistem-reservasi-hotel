@@ -21,11 +21,11 @@ class Kamar {
     }
 
     public String getTipeKamar() {
-        return tipeKamar; // Return the type of the room
+        return tipeKamar;
     }
 
     @Override
     public String toString() {
-        return tipeKamar + " (Kamar " + nomorKamar + ")"; // Display room type and number
+        return tipeKamar + " (Kamar " + nomorKamar + ")";
     }
 }
