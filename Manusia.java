@@ -9,7 +9,6 @@ public abstract class Manusia {
         this.no_hp = no_hp;
     }
 
-
     public String getNik() {
         return nik;
     }
@@ -17,7 +16,6 @@ public abstract class Manusia {
     public void setNik(String nik) {
         this.nik = nik;
     }
-
 
     public String getNama() {
         return nama;
@@ -34,7 +32,6 @@ public abstract class Manusia {
     public void setNoHp(String no_hp) {
         this.no_hp = no_hp;
     }
-
 
     public abstract void tampilkanInfo();
 }
