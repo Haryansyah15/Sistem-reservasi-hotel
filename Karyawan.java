@@ -1,9 +1,9 @@
-public class Karyawan extends Manusia {
+class Karyawan extends Manusia {
     private double gaji;
     private String posisi;
 
     public Karyawan(String nik, String nama, String no_hp, double gaji, String posisi) {
-        super(nik, nama, no_hp); // Memanggil constructor dari kelas Manusia
+        super(nik, nama, no_hp);
         this.gaji = gaji;
         this.posisi = posisi;
     }
