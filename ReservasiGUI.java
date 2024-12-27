@@ -14,10 +14,10 @@ public abstract class ReservasiGUI implements InterfaceReservasi {
     private JTextField namaField;
     private JTextField alamatField;
     private JTextField emailField;
-    private JComboBox<Kamar> kamarComboBox; // ComboBox for room selection
+    private JComboBox<Kamar> kamarComboBox; 
     private JButton buatReservasiButton;
     private JButton batalkanReservasiButton;
-    private JButton lihatFasilitasButton; // Button to view room facilities
+    private JButton lihatFasilitasButton; 
 
     public ReservasiGUI(ReservasiHotel sistemReservasi) {
         this.sistemReservasi = sistemReservasi;
@@ -33,7 +33,7 @@ public abstract class ReservasiGUI implements InterfaceReservasi {
 
         // Create a panel for input fields
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(6, 2)); // Update grid layout to accommodate room selection
+        inputPanel.setLayout(new GridLayout(6, 2)); 
 
         // Create labels and text fields
         inputPanel.add(new JLabel("Nama:"));
@@ -50,13 +50,13 @@ public abstract class ReservasiGUI implements InterfaceReservasi {
 
         // Create a label and combo box for selecting a room
         inputPanel.add(new JLabel("Pilih Kamar:"));
-        kamarComboBox = new JComboBox<>(getKamarTersedia()); // Populate with available rooms
+        kamarComboBox = new JComboBox<>(getKamarTersedia()); 
         inputPanel.add(kamarComboBox);
 
         // Create buttons
         buatReservasiButton = new JButton("Buat Reservasi");
         batalkanReservasiButton = new JButton("Batalkan Reservasi");
-        lihatFasilitasButton = new JButton("Lihat Fasilitas Kamar"); // Button to view room facilities
+        lihatFasilitasButton = new JButton("Lihat Fasilitas Kamar"); 
 
         // Add action listeners to buttons
         buatReservasiButton.addActionListener(new ActionListener() {
@@ -65,12 +65,12 @@ public abstract class ReservasiGUI implements InterfaceReservasi {
                 String nama = namaField.getText().trim();
                 String alamat = alamatField.getText().trim();
                 String email = emailField.getText().trim();
-                Kamar kamarDipilih = (Kamar) kamarComboBox.getSelectedItem(); // Get selected room
+                Kamar kamarDipilih = (Kamar) kamarComboBox.getSelectedItem(); 
 
                 if (!nama.isEmpty() && !alamat.isEmpty() && !email.isEmpty() && kamarDipilih != null) {
                     Reservasi reservasi = buatReservasi(nama, alamat, email, kamarDipilih);
                     if (reservasi != null) {
-                        // Write reservation details to a text file
+                        
                         writeReservationToFile(reservasi);
                     }
                 } else {
@@ -94,9 +94,9 @@ public abstract class ReservasiGUI implements InterfaceReservasi {
         lihatFasilitasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Kamar kamarDipilih = (Kamar) kamarComboBox.getSelectedItem(); // Get selected room
+                Kamar kamarDipilih = (Kamar) kamarComboBox.getSelectedItem(); 
                 if (kamarDipilih != null) {
-                    String tipeKamar = kamarDipilih.tipeKamar; // Get room type
+                    String tipeKamar = kamarDipilih.tipeKamar; 
                     Tipe_Kamar tipe = null;
                     for (Tipe_Kamar t : Tipe_Kamar.generateTipeKamar()) {
                         if (t.getNamaTipe().equalsIgnoreCase(tipeKamar)) {
@@ -115,28 +115,28 @@ public abstract class ReservasiGUI implements InterfaceReservasi {
             }
         });
 
-        // Add components to the frame
+        
         frame.add(inputPanel, BorderLayout.CENTER);
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(buatReservasiButton);
         buttonPanel.add(batalkanReservasiButton);
-        buttonPanel.add(lihatFasilitasButton); // Add the facilities button to the panel
+        buttonPanel.add(lihatFasilitasButton); 
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Set frame visibility
+        
         frame.setVisible(true);
     }
 
     private Kamar[] getKamarTersedia() {
-        List<Kamar> kamarList = sistemReservasi.getDaftarKamarTersedia(); // Method to get available rooms
-        return kamarList.toArray(new Kamar[0]); // Convert list to array
+        List<Kamar> kamarList = sistemReservasi.getDaftarKamarTersedia(); 
+        return kamarList.toArray(new Kamar[0]);
     }
 
     @Override
     public Reservasi buatReservasi(String nama, String alamat, String email, Kamar kamar) {
         sistemReservasi.buatReservasi(nama, alamat, email, kamar);
         JOptionPane.showMessageDialog(frame, "Reservasi berhasil dibuat untuk " + nama);
-        return new Reservasi(new Pelanggan("123", nama, "0123", alamat, email), kamar, LocalDate.now(), LocalDate.now().plusDays(1)); // Example check-in and check-out
+        return new Reservasi(new Pelanggan("123", nama, "0123", alamat, email), kamar, LocalDate.now(), LocalDate.now().plusDays(1)); 
     }
 
     @Override
