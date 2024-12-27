@@ -1,0 +1,9 @@
+Nama: irfan
+Alamat: tuban
+Email: irfan@gmail.com
+Kamar: Deluxe
+Tanggal Check-in: 2024-12-27
+Tanggal Check-out: 2024-12-28
+Total Biaya: 200000.0
+Status: Dipesan
+====================================
