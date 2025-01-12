@@ -1,18 +1,10 @@
-class Karyawan extends Manusia {
-    private double gaji;
+public class Karyawan extends Manusia{
     private String posisi;
+    private String gaji;
 
-    public Karyawan(String nik, String nama, String no_hp, double gaji, String posisi) {
-        super(nik, nama, no_hp);
-        this.gaji = gaji;
+    public Karyawan(String nik, String nama, String nohp, String posisi, String gaji) {
+        super(nik, nama, nohp);
         this.posisi = posisi;
-    }
-
-    public double getGaji() {
-        return gaji;
-    }
-
-    public void setGaji(double gaji) {
         this.gaji = gaji;
     }
 
@@ -24,12 +16,18 @@ class Karyawan extends Manusia {
         this.posisi = posisi;
     }
 
+    public String getGaji() {
+        return gaji;
+    }
+
+    public void setGaji(String gaji) {
+        this.gaji = gaji;
+    }
+
     @Override
-    public void tampilkanInfo() {
-        System.out.println("NIK: " + getNik());
+    public void DisplayInfo() {
         System.out.println("Nama: " + getNama());
-        System.out.println("No HP: " + getNoHp());
-        System.out.println("Gaji: " + getGaji());
         System.out.println("Posisi: " + getPosisi());
+        System.out.println("Gaji: " + getGaji());
     }
 }
