@@ -1,12 +1,12 @@
-public abstract class Manusia {
+public class Manusia {
     private String nik;
     private String nama;
-    private String no_hp;
+    private String nohp;
 
-    public Manusia(String nik, String nama, String no_hp) {
+    public Manusia(String nik, String nama, String nohp) {
         this.nik = nik;
         this.nama = nama;
-        this.no_hp = no_hp;
+        this.nohp = nohp;
     }
 
     public String getNik() {
@@ -25,13 +25,12 @@ public abstract class Manusia {
         this.nama = nama;
     }
 
-    public String getNoHp() {
-        return no_hp;
+    public String getNohp() {
+        return nohp;
     }
 
-    public void setNoHp(String no_hp) {
-        this.no_hp = no_hp;
+    public void setNohp(String nohp) {
+        this.nohp = nohp;
     }
-
-    public abstract void tampilkanInfo();
+    public void DisplayInfo(){}
 }
