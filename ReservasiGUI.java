@@ -1,157 +1,183 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
 
-public abstract class ReservasiGUI implements InterfaceReservasi {
-    private ReservasiHotel sistemReservasi;
+public class ReservasiGUI {
     private JFrame frame;
-    private JTextField namaField;
-    private JTextField alamatField;
-    private JTextField emailField;
-    private JComboBox<Kamar> kamarComboBox; 
-    private JButton buatReservasiButton;
-    private JButton batalkanReservasiButton;
-    private JButton lihatFasilitasButton; 
+    private JTextField namaField, nikField, noHpField, alamatField, emailField;
+    private JComboBox<String> tipeKamarBox;
+    private JButton buatReservasiButton, lihatKamarButton, laporanButton, batalButton;
 
-    public ReservasiGUI(ReservasiHotel sistemReservasi) {
-        this.sistemReservasi = sistemReservasi;
-        initialize();
-    }
-
-    private void initialize() {
-        // Create the main frame
-        frame = new JFrame("Reservasi Hotel");
+    public ReservasiGUI() {
+        frame = new JFrame("Sistem Reservasi Hotel");
+        frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new BorderLayout());
+        frame.setLayout(new GridLayout(9, 2));
 
-        // Create a panel for input fields
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(6, 2)); 
-
-        // Create labels and text fields
-        inputPanel.add(new JLabel("Nama:"));
+        frame.add(new JLabel("Nama:"));
         namaField = new JTextField();
-        inputPanel.add(namaField);
+        frame.add(namaField);
 
-        inputPanel.add(new JLabel("Alamat:"));
+        frame.add(new JLabel("NIK:"));
+        nikField = new JTextField();
+        frame.add(nikField);
+
+        frame.add(new JLabel("No HP:"));
+        noHpField = new JTextField();
+        frame.add(noHpField);
+
+        frame.add(new JLabel("Alamat:"));
         alamatField = new JTextField();
-        inputPanel.add(alamatField);
+        frame.add(alamatField);
 
-        inputPanel.add(new JLabel("Email:"));
+        frame.add(new JLabel("Email:"));
         emailField = new JTextField();
-        inputPanel.add(emailField);
+        frame.add(emailField);
 
-        // Create a label and combo box for selecting a room
-        inputPanel.add(new JLabel("Pilih Kamar:"));
-        kamarComboBox = new JComboBox<>(getKamarTersedia()); 
-        inputPanel.add(kamarComboBox);
+        frame.add(new JLabel("Tipe Kamar:"));
+        tipeKamarBox = new JComboBox<>(new String[]{"Standard", "Deluxe", "Suite"});
+        frame.add(tipeKamarBox);
 
-        // Create buttons
         buatReservasiButton = new JButton("Buat Reservasi");
-        batalkanReservasiButton = new JButton("Batalkan Reservasi");
-        lihatFasilitasButton = new JButton("Lihat Fasilitas Kamar"); 
+        frame.add(buatReservasiButton);
 
-        // Add action listeners to buttons
+        lihatKamarButton = new JButton("Lihat Kamar Tersedia");
+        frame.add(lihatKamarButton);
+
+        laporanButton = new JButton("Laporan Reservasi");
+        frame.add(laporanButton);
+
+        batalButton = new JButton("Batalkan Reservasi");
+        frame.add(batalButton);
+
+        frame.setVisible(true);
+
+        // Event handling
         buatReservasiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nama = namaField.getText().trim();
-                String alamat = alamatField.getText().trim();
-                String email = emailField.getText().trim();
-                Kamar kamarDipilih = (Kamar) kamarComboBox.getSelectedItem(); 
+                String nama = namaField.getText();
+                String nik = nikField.getText();
+                String noHp = noHpField.getText();
+                String alamat = alamatField.getText();
+                String email = emailField.getText();
+                String tipeKamar = (String) tipeKamarBox.getSelectedItem();
 
-                if (!nama.isEmpty() && !alamat.isEmpty() && !email.isEmpty() && kamarDipilih != null) {
-                    Reservasi reservasi = buatReservasi(nama, alamat, email, kamarDipilih);
-                    if (reservasi != null) {
-                        
-                        writeReservationToFile(reservasi);
+                // Simulate creating a reservation
+                String reservasi = "Nama: " + nama + ", NIK: " + nik + ", No HP: " + noHp + ", Alamat: " + alamat + ", Email: " + email + ", Tipe Kamar: " + tipeKamar;
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter("reservasi_output.txt", true))) {
+                    writer.write(reservasi);
+                    writer.newLine();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(frame, "Gagal menyimpan reservasi: " + ex.getMessage());
+                }
+                JOptionPane.showMessageDialog(frame, "Reservasi untuk " + nama + " berhasil dibuat!");
+            }
+        });
+
+        lihatKamarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame kamarFrame = new JFrame("Kamar Tersedia");
+                kamarFrame.setSize(300, 300);
+                kamarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                JTextArea kamarArea = new JTextArea();
+                kamarArea.setEditable(false);
+                kamarArea.setText("Daftar Kamar Tersedia:\n");
+
+                // Simulasi data kamar yang tersedia
+                kamarArea.append("Kamar 101 - Standard\n");
+                kamarArea.append("Kamar 102 - Deluxe\n");
+                kamarArea.append("Kamar 103 - Suite\n");
+                kamarArea.append("Kamar 104 - Family Room\n");
+
+                kamarFrame.add(new JScrollPane(kamarArea));
+                kamarFrame.setVisible(true);
+            }
+        });
+
+        laporanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame laporanFrame = new JFrame("Laporan Reservasi");
+                laporanFrame.setSize(300, 300);
+                laporanFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                JTextArea laporanArea = new JTextArea();
+                laporanArea.setEditable(false);
+                laporanArea.setText("Laporan Reservasi:\n");
+
+                // Membaca data dari file "reservasi_output.txt"
+                try (BufferedReader reader = new BufferedReader(new FileReader("reservasi_output.txt"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        laporanArea.append(line + "\n");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Silakan isi semua field.");
+                } catch (IOException ex) {
+                    laporanArea.append("Gagal membaca file reservasi.\n");
                 }
+
+                laporanFrame.add(new JScrollPane(laporanArea));
+                laporanFrame.setVisible(true);
             }
         });
 
-        batalkanReservasiButton.addActionListener(new ActionListener() {
+        batalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nama = JOptionPane.showInputDialog(frame, "Masukkan nama untuk membatalkan reservasi:");
-                if (nama != null && !nama.trim().isEmpty()) {
-                    batalkanReservasi(nama.trim());
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Nama tidak boleh kosong.");
-                }
-            }
-        });
+                JFrame batalFrame = new JFrame("Batalkan Reservasi");
+                batalFrame.setSize(400, 200);
+                batalFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                batalFrame.setLayout(new GridLayout(2, 1));
 
-        lihatFasilitasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Kamar kamarDipilih = (Kamar) kamarComboBox.getSelectedItem(); 
-                if (kamarDipilih != null) {
-                    String tipeKamar = kamarDipilih.tipeKamar; 
-                    Tipe_Kamar tipe = null;
-                    for (Tipe_Kamar t : Tipe_Kamar.generateTipeKamar()) {
-                        if (t.getNamaTipe().equalsIgnoreCase(tipeKamar)) {
-                            tipe = t;
-                            break;
+                JTextField namaField = new JTextField();
+                JButton batalkanButton = new JButton("Batalkan Reservasi");
+
+                batalFrame.add(new JLabel("Masukkan Nama Pelanggan:"));
+                batalFrame.add(namaField);
+                batalFrame.add(batalkanButton);
+
+                batalkanButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ev) {
+                        String nama = namaField.getText();
+                        if (nama != null && !nama.isEmpty()) {
+                            // Logika pembatalan reservasi
+                            try {
+                                List<String> updatedData = new ArrayList<>();
+                                try (BufferedReader reader = new BufferedReader(new FileReader("reservasi_output.txt"))) {
+                                    String line;
+                                    while ((line = reader.readLine()) != null) {
+                                        if (!line.contains("Nama: " + nama)) {
+                                            updatedData.add(line);
+                                        }
+                                    }
+                                }
+
+                                try (BufferedWriter writer = new BufferedWriter(new FileWriter("reservasi_output.txt"))) {
+                                    for (String reservasi : updatedData) {
+                                        writer.write(reservasi + "\n");
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(batalFrame, "Reservasi untuk " + nama + " berhasil dibatalkan.");
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(batalFrame, "Terjadi kesalahan: " + ex.getMessage());
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(batalFrame, "Nama tidak boleh kosong.");
                         }
                     }
-                    if (tipe != null) {
-                        JOptionPane.showMessageDialog(frame, "Fasilitas untuk " + tipeKamar + ":\n" + tipe.getFasilitasString());
-                    } else {
-                        JOptionPane.showMessageDialog(frame, "Fasilitas untuk tipe kamar ini tidak ditemukan.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Silakan pilih kamar terlebih dahulu.");
-                }
+                });
+
+                batalFrame.setVisible(true);
             }
         });
-
-        
-        frame.add(inputPanel, BorderLayout.CENTER);
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(buatReservasiButton);
-        buttonPanel.add(batalkanReservasiButton);
-        buttonPanel.add(lihatFasilitasButton); 
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-
-        
-        frame.setVisible(true);
     }
 
-    private Kamar[] getKamarTersedia() {
-        List<Kamar> kamarList = sistemReservasi.getDaftarKamarTersedia(); 
-        return kamarList.toArray(new Kamar[0]);
-    }
 
-    @Override
-    public Reservasi buatReservasi(String nama, String alamat, String email, Kamar kamar) {
-        sistemReservasi.buatReservasi(nama, alamat, email, kamar);
-        JOptionPane.showMessageDialog(frame, "Reservasi berhasil dibuat untuk " + nama);
-        return new Reservasi(new Pelanggan("123", nama, "0123", alamat, email), kamar, LocalDate.now(), LocalDate.now().plusDays(1)); 
-    }
-
-    @Override
-    public void batalkanReservasi(String nama) {
-        sistemReservasi.batalkanReservasi(nama);
-    }
-
-    private void writeReservationToFile(Reservasi reservasi) {
-        String fileName = "reservasi.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-            writer.write(reservasi.getDetails());
-            writer.write("====================================\n");
-            JOptionPane.showMessageDialog(frame, "Detail reservasi telah disimpan ke " + fileName);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(frame, "Error saat menyimpan detail reservasi: " + e.getMessage());
-        }
-    }
 }
