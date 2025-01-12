@@ -1,31 +1,41 @@
-class Kamar {
-    public int nomorKamar;
-    public String tipeKamar;
-    public double hargaPerMalam;
-    public String status;
-    public String getFasilitas;
+public class Kamar {
+    private String nokamar;
+    private TipeKamar tipeKamar;
+    private String status;
 
-    public Kamar(int nomorKamar, String tipeKamar, double hargaPerMalam) {
-        this.nomorKamar = nomorKamar;
+    public Kamar(String nokamar, TipeKamar tipeKamar, String status) {
+        this.nokamar = nokamar;
         this.tipeKamar = tipeKamar;
-        this.hargaPerMalam = hargaPerMalam;
-        this.status = "Tersedia";
+        this.status = status;
     }
 
-    public boolean cekKetersediaan() {
-        return status.equals("Tersedia");
+    public Kamar (String nokamar, String status){
+        this.nokamar = nokamar;
+        this.status = status;
     }
 
-    public void updateStatus(String statusBaru) {
-        status = statusBaru;
+    public String getNokamar() {
+        return nokamar;
     }
 
-    public String getTipeKamar() {
+    public void setNokamar(String nokamar) {
+        this.nokamar = nokamar;
+    }
+
+    public TipeKamar getTipeKamar() {
         return tipeKamar;
     }
 
-    @Override
-    public String toString() {
-        return tipeKamar + " (Kamar " + nomorKamar + ")";
+    public void setTipeKamar(TipeKamar tipeKamar) {
+        this.tipeKamar = tipeKamar;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }
