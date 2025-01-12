@@ -1,9 +1,9 @@
-class Pelanggan extends Manusia{
-    String alamat;
-    String email;
+public class Pelanggan extends Manusia{
+    private String alamat;
+    private String email;
 
-    public Pelanggan(String nik, String nama, String no_hp, String alamat, String email) {
-        super(nik, nama, no_hp);
+    public Pelanggan(String nik, String nama, String nohp, String alamat, String email) {
+        super(nik, nama, nohp);
         this.alamat = alamat;
         this.email = email;
     }
@@ -25,11 +25,10 @@ class Pelanggan extends Manusia{
     }
 
     @Override
-    public void tampilkanInfo() {
-        System.out.println("NIK: " + getNik());
+    public void DisplayInfo() {
         System.out.println("Nama: " + getNama());
-        System.out.println("No HP: " + getNoHp());
         System.out.println("Alamat: " + getAlamat());
         System.out.println("Email: " + getEmail());
+
     }
 }
