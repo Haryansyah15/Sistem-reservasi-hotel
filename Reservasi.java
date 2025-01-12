@@ -1,40 +1,34 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 
-class Reservasi {
-    Pelanggan pelanggan;
-    Kamar kamar;
-    LocalDate tanggalCheckin;
-    LocalDate tanggalCheckout;
-    double totalBiaya;
-    String statusReservasi;
+public class Reservasi {
+    private Pelanggan pelanggan;
+    private Kamar kamar;
+    private LocalDate tglCekin;
+    private LocalDate tglCekout;
 
-    public Reservasi(Pelanggan pelanggan, Kamar kamar, LocalDate tanggalCheckin, LocalDate tanggalCheckout) {
+    public Reservasi(Pelanggan pelanggan, Kamar kamar, LocalDate tglCekin, LocalDate tglCekout) {
         this.pelanggan = pelanggan;
         this.kamar = kamar;
-        this.tanggalCheckin = tanggalCheckin;
-        this.tanggalCheckout = tanggalCheckout;
-        this.statusReservasi = "Dipesan";
-        hitungBiaya();
+        this.tglCekin = tglCekin;
+        this.tglCekout = tglCekout;
     }
 
-    public void hitungBiaya() {
-        long lamaMenginap = tanggalCheckout.toEpochDay() - tanggalCheckin.toEpochDay();
-        totalBiaya = lamaMenginap * kamar.hargaPerMalam;
+    public Pelanggan getPelanggan() {
+        return pelanggan;
     }
 
-    public boolean validasiReservasi() {
-        return !tanggalCheckin.isAfter(tanggalCheckout);
+    public Kamar getKamar() {
+        return kamar;
     }
 
-
-    public String getDetails() {
-        return "Nama: " + pelanggan.getNama() + "\n" +
-                "Alamat: " + pelanggan.alamat + "\n" +
-                "Email: " + pelanggan.email + "\n" +
-                "Kamar: " + kamar.tipeKamar + "\n" +
-                "Tanggal Check-in: " + tanggalCheckin + "\n" +
-                "Tanggal Check-out: " + tanggalCheckout + "\n" +
-                "Total Biaya: " + totalBiaya + "\n" +
-                "Status: " + statusReservasi + "\n";
+    public LocalDate getTglCekin() {
+        return tglCekin;
     }
+
+    public LocalDate getTglCekout() {
+        return tglCekout;
+    }
+
 }
