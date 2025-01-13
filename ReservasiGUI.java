@@ -56,7 +56,7 @@ public class ReservasiGUI {
 
         frame.setVisible(true);
 
-        // Event handling
+        
         buatReservasiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,7 +67,7 @@ public class ReservasiGUI {
                 String email = emailField.getText();
                 String tipeKamar = (String) tipeKamarBox.getSelectedItem();
 
-                // Simulate creating a reservation
+                
                 String reservasi = "Nama: " + nama + ", NIK: " + nik + ", No HP: " + noHp + ", Alamat: " + alamat + ", Email: " + email + ", Tipe Kamar: " + tipeKamar;
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter("reservasi_output.txt", true))) {
                     writer.write(reservasi);
@@ -90,7 +90,7 @@ public class ReservasiGUI {
                 kamarArea.setEditable(false);
                 kamarArea.setText("Daftar Kamar Tersedia:\n");
 
-                // Simulasi data kamar yang tersedia
+                
                 kamarArea.append("Kamar 101 - Standard\n");
                 kamarArea.append("Kamar 102 - Deluxe\n");
                 kamarArea.append("Kamar 103 - Suite\n");
@@ -112,7 +112,7 @@ public class ReservasiGUI {
                 laporanArea.setEditable(false);
                 laporanArea.setText("Laporan Reservasi:\n");
 
-                // Membaca data dari file "reservasi_output.txt"
+                
                 try (BufferedReader reader = new BufferedReader(new FileReader("reservasi_output.txt"))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -147,7 +147,7 @@ public class ReservasiGUI {
                     public void actionPerformed(ActionEvent ev) {
                         String nama = namaField.getText();
                         if (nama != null && !nama.isEmpty()) {
-                            // Logika pembatalan reservasi
+                            
                             try {
                                 List<String> updatedData = new ArrayList<>();
                                 try (BufferedReader reader = new BufferedReader(new FileReader("reservasi_output.txt"))) {
